@@ -1,4 +1,6 @@
 class Card
+  include Comparable
+  
   CLUB = 1
   DIAMOND = 2
   HEART = 3
@@ -14,26 +16,20 @@ class Card
     self.ordinal = ordinal = ordinal || 2
     self.suit = suit || Card::CLUB
   end
-  
-  def <=>(card)
-    if self.ordinal > card.ordinal
-      return 1
-    elsif self.ordinal == card.ordinal
-      return 0
-    else
-      return -1
-    end
-  end
-  
+    
   def ordinal
     @ordinal
   end
   
+  def ==(card)
+    return self.ordinal == card.ordinal && self.suit == card.suit
+  end
+ 
   def ordinal=(value)
     if Card::MAX_ORDINAL >= value && Card::MIN_ORDINAL <= value
       @ordinal = value
     else
-      raise Error.new("Invalid card value")
+      raise "Invalid card value"
     end
   end
   
@@ -45,7 +41,7 @@ class Card
     if ([Card::CLUB, Card::DIAMOND, Card::HEART, Card::SPADE]).include? value
       @suit = value
     else
-      raise Error.new("Invalid Suit")
+      raise "Invalid Suit"
     end
   end
   

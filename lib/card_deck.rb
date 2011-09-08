@@ -51,9 +51,13 @@ class CardDeck
   end
   
   def discard_card(card)
-    self.discard << card
+    if !self.deck.include?(card) && !self.discard.include?(card)
+      self.discard << card
+    else
+      raise "Invalid Discard - Duplicate Card"
+    end
   end
-    
+      
   def gather_cards
     self.deck += self.discard
     shuffle
