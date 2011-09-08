@@ -9,7 +9,7 @@ describe CardDeck do
     
     it "returns a shuffled deck" do
       deck = CardDeck.new
-      deck[0].should_not == Card.new(1, Card::CLUB)
+      deck[0].should_not == Card.new(2, Card::CLUB)
     end
   end
   
@@ -62,7 +62,7 @@ describe CardDeck do
     
     it "does not allow a duplicate card to be placed in discard" do
       deck = CardDeck.new
-      lambda{deck.discard_card(Card.new(1, Card::SPADE))}.should raise_error
+      lambda{deck.discard_card(Card.new(14, Card::SPADE))}.should raise_error
     end
   end
   

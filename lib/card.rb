@@ -5,15 +5,20 @@ class Card
   DIAMOND = 2
   HEART = 3
   SPADE = 4
+  STAR = 5
+  CUP = 6
+  PENTACLE = 7
+  SWORD = 8
+  WAND = 9
   
-  MAX_ORDINAL = 13
-  MIN_ORDINAL = 1
+  MAX_ORDINAL = 14
+  MIN_ORDINAL = 2
   
   @ordinal
   @suit
   
   def initialize(ordinal, suit)
-    self.ordinal = ordinal = ordinal || 2
+    self.ordinal = ordinal || 2
     self.suit = suit || Card::CLUB
   end
     
@@ -57,7 +62,7 @@ class Card
       "Queen"
     when 11
       "Jack"
-    when 1
+    when 14
       "Ace"
     else
       self.ordinal.to_s
@@ -74,6 +79,14 @@ class Card
       "Hearts"
     when Card::SPADE
       "Spades"
+    when Card::CUP
+      "Cups"
+    when Card::PENTACLE
+      "Pentacles"
+    when Card::SWORD
+      "Swords"
+    when Card::WAND
+      "Wands"
     end
   end
 end

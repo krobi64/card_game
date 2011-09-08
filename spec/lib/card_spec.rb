@@ -6,7 +6,7 @@ describe Card do
   end
   
   it "does not accept any ordinal outside of 1..13" do
-    lambda{Card.new(14, Card::CLUB)}.should raise_error
+    lambda{Card.new(15, Card::CLUB)}.should raise_error
   end
   
   it "accepts any valid suit" do
