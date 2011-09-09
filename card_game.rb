@@ -1,3 +1,3 @@
-dir = File.dirname(__FILE__) + "/lib"
-$LOAD_PATH.unshift(dir)
-Dir[File.join(dir, "*.rb")].each {|file| require File.basename(file) }
+require "#{File.dirname(__FILE__)}/lib/util/string_helper"
+Dir["#{File.dirname(__FILE__)}/lib/**/*.rb"].each {|file| require file }
+

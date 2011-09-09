@@ -1,6 +1,6 @@
 class CardDeck
   
-  DEFAULT_SUITS = [Card::CLUB, Card::DIAMOND, Card::HEART, Card::SPADE]
+  DEFAULT_SUITS = [:clubs, :diamonds, :hearts, :spades]
   DEFAULT_QTY_DECKS = 1
   DEFAULT_ORDINALS = (Card::MIN_ORDINAL..Card::MAX_ORDINAL)
   

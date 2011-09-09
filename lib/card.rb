@@ -1,15 +1,8 @@
 class Card
   include Comparable
+  include Util::StringHelper
   
-  CLUB = 1
-  DIAMOND = 2
-  HEART = 3
-  SPADE = 4
-  STAR = 5
-  CUP = 6
-  PENTACLE = 7
-  SWORD = 8
-  WAND = 9
+  VALID_SUITS = [:clubs, :diamonds, :hearts, :spades, :stars, :cups, :pentacles, :swords, :wands]
   
   MAX_ORDINAL = 14
   MIN_ORDINAL = 2
@@ -19,9 +12,9 @@ class Card
   
   attr_reader :ordinal, :suit
   
-  def initialize(ordinal=2, suit=Card::CLUB)
+  def initialize(ordinal=2, suit=:clubs)
     self.ordinal = ordinal
-    self.suit = suit
+    self.suit = pluralize(suit.to_s).to_sym
   end
     
   def ==(card)
@@ -37,7 +30,7 @@ class Card
   end
   
   def suit=(value)
-    if ([Card::CLUB, Card::DIAMOND, Card::HEART, Card::SPADE]).include? value
+    if (Card::VALID_SUITS).include? value
       @suit = value
     else
       raise "Invalid Suit"
@@ -64,23 +57,6 @@ class Card
   end
   
   def human_suit
-    case self.suit
-    when Card::CLUB
-      "Clubs"
-    when Card::DIAMOND
-      "Diamonds"
-    when Card::HEART
-      "Hearts"
-    when Card::SPADE
-      "Spades"
-    when Card::CUP
-      "Cups"
-    when Card::PENTACLE
-      "Pentacles"
-    when Card::SWORD
-      "Swords"
-    when Card::WAND
-      "Wands"
-    end
+    self.suit.to_s.capitalize
   end
 end

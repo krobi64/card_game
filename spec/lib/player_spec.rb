@@ -32,7 +32,7 @@ describe Player do
     end
 
     describe "#clear_hand" do
-      it "invokes CardDeck.discard_card" do
+      it "invokes CardDeck#discard_card" do
         @card_deck.should_receive(:discard_card)
         @player.clear_hand @card_deck
       end
