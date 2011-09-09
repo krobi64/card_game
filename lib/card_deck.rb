@@ -56,7 +56,7 @@ class CardDeck
   def deal(num_cards, players)
     gather_cards if @deck.size < (num_cards * players.size)
     players.each do |player|
-      player.clear_hand
+      player.clear_hand self
     end
     
     (1..num_cards).each do |i|

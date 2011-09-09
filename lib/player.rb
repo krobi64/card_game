@@ -4,29 +4,25 @@ class Player
   attr_accessor :hand
   
   def initialize
-    self.clear_hand
+    @hand = []
   end
   
-  def clear_hand
-    self.hand = [] if self.hand.nil?
-    if self.hand.size > 0
-      self.hand.each do |card|
-        self.discard card
+  def clear_hand(card_deck)
+    self.hand = [] if hand.nil?
+    if hand.size > 0
+      hand.each do |card|
+        discard card, card_deck
       end
     end
   end
   
    def discard(card, card_deck)
-     @hand -= card
+     self.hand -= [card]
      card_deck.discard_card(card)
    end
    
    def human_hand
-     a = []
-     self.hand.each do |card|
-       a << card.to_s
-     end
-     a
+     self.hand.map { |card| card.to_s }
    end
-     
+   
 end

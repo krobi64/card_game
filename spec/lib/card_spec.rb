@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Card do
-  it "accepts any ordinal between 1 and 13" do
+  it "accepts any ordinal between 2 and 14" do
     lambda{Card.new(13, Card::CLUB)}.should_not raise_error
   end
   
-  it "does not accept any ordinal outside of 1..13" do
+  it "does not accept any ordinal outside of 2..14" do
     lambda{Card.new(15, Card::CLUB)}.should raise_error
   end
   

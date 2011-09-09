@@ -17,15 +17,13 @@ class Card
   @ordinal
   @suit
   
-  def initialize(ordinal, suit)
-    self.ordinal = ordinal || 2
-    self.suit = suit || Card::CLUB
+  attr_reader :ordinal, :suit
+  
+  def initialize(ordinal=2, suit=Card::CLUB)
+    self.ordinal = ordinal
+    self.suit = suit
   end
     
-  def ordinal
-    @ordinal
-  end
-  
   def ==(card)
     return self.ordinal == card.ordinal && self.suit == card.suit
   end
@@ -36,10 +34,6 @@ class Card
     else
       raise "Invalid card value"
     end
-  end
-  
-  def suit
-    @suit
   end
   
   def suit=(value)

@@ -46,9 +46,13 @@ describe CardDeck do
       card4 = deck[deck.size - 4]
       deck.deal 2, @players
       @kris.hand[0].should == card1
+      @kris.hand.size.should == 2
       @marge.hand[0].should == card2
+      @marge.hand.size.should == 2
       @marj.hand[0].should == card3
+      @marj.hand.size.should == 2
       @joann.hand[0].should == card4
+      @joann.hand.size.should == 2
     end
   end
   
