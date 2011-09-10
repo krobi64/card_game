@@ -8,7 +8,7 @@ class CardDeck
   @number_of_decks = CardDeck::DEFAULT_QTY_DECKS
   @valid_ordinals = CardDeck::DEFAULT_ORDINALS
   
-  attr_accessor :deck, :discard
+  attr_accessor :deck, :discard, :cards
   
   class << self
     
@@ -41,14 +41,14 @@ class CardDeck
   end
   
   def initialize
-    @deck = self.class.get_deck
+    @cards = @deck = self.class.get_deck
     @discard = []
   end
     
   def size
     @deck.size
   end
-    
+  
   def deal_card
     @deck.pop
   end

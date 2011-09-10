@@ -1,0 +1,5 @@
+# config/cucumber.yml
+##YAML Template
+---
+  
+  default: --format profile features
