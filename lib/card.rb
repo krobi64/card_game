@@ -12,20 +12,31 @@ class Card
   
   attr_reader :ordinal, :suit
   
+  class InvalidCardError < StandardError; end
+  
   def initialize(ordinal=2, suit=:clubs)
     self.ordinal = ordinal
     self.suit = pluralize(suit.to_s).to_sym
   end
     
-  def ==(card)
-    return self.ordinal == card.ordinal && self.suit == card.suit
+  def <=>(card)
+    result = if self.ordinal < card.ordinal
+      -1
+    elsif self.suit.to_s < card.suit.to_s && self.suit == card.suit
+      -1
+    elsif self.ordinal == card.ordinal && self.suit == card.suit
+      0
+    else
+      1
+    end
+      
   end
  
   def ordinal=(value)
     if Card::MAX_ORDINAL >= value && Card::MIN_ORDINAL <= value
       @ordinal = value
     else
-      raise "Invalid card value"
+      raise InvalidCardError.new("Invalid card value")
     end
   end
   
@@ -33,7 +44,7 @@ class Card
     if (Card::VALID_SUITS).include? value
       @suit = value
     else
-      raise "Invalid Suit"
+      raise InvalidCardError.new("Invalid Suit")
     end
   end
   

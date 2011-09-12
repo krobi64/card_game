@@ -1,4 +1,4 @@
 Card Game
 =========
 
-A basic structure to create card games 
+A basic structure to create card games

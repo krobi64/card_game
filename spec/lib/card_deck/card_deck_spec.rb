@@ -1,30 +1,30 @@
 require 'spec_helper'
 
-describe CardDeck do
+describe CardDeck::Base do
+  before(:each) do
+    @deck = CardDeck::Base.new
+  end
+  
   describe "upon creation" do
     it "returns a full deck of cards" do
-      deck = CardDeck.new
-      deck.size.should == 52
+      @deck.size.should == 52
     end
     
     it "returns a shuffled deck" do
-      deck = CardDeck.new
-      deck[0].should_not == Card.new(2, :clubs)
+      @deck.cards.should_not == @deck.cards.sort
     end
   end
   
   describe "#deal_card" do
     it "returns the first card on the deck" do
-      deck = CardDeck.new
-      a = deck[deck.size - 1]
-      b = deck.deal_card
+      a = @deck[@deck.size - 1]
+      b = @deck.deal_card
       a.should == b
     end
     
     it "removes the card from the deck" do
-      deck = CardDeck.new
-      card = deck.deal_card
-      deck.deck.should_not include card
+      card = @deck.deal_card
+      @deck.cards.should_not include card
     end
   end
   
@@ -39,12 +39,11 @@ describe CardDeck do
     end
     
     it "distributes the correct number of cards to players, in order" do
-      deck = CardDeck.new
-      card1 = deck[deck.size - 1]
-      card2 = deck[deck.size - 2]
-      card3 = deck[deck.size - 3]
-      card4 = deck[deck.size - 4]
-      deck.deal 2, @players
+      card1 = @deck[@deck.size - 1]
+      card2 = @deck[@deck.size - 2]
+      card3 = @deck[@deck.size - 3]
+      card4 = @deck[@deck.size - 4]
+      @deck.deal 2, @players
       @kris.hand[0].should == card1
       @kris.hand.size.should == 2
       @marge.hand[0].should == card2
@@ -58,28 +57,27 @@ describe CardDeck do
   
   describe "#discard_card" do
     it "places the card in the discard pile" do
-      deck = CardDeck.new
-      card = deck.deal_card
-      deck.discard_card(card)
-      deck.discard[0].should == card
+      card = @deck.deal_card
+      @deck.discard_card(card)
+      @deck.discard[0].should == card
     end
     
     it "does not allow a duplicate card to be placed in discard" do
-      deck = CardDeck.new
-      lambda{deck.discard_card(Card.new(14, :spades))}.should raise_error
+      lambda{@deck.discard_card(Card.new(14, :spades))}.should raise_error
     end
   end
   
   describe "#gather_cards" do
     it "returns all cards to the deck and shuffles the deck" do
-      deck = CardDeck.new
-      card = deck.deal_card
-      deck.discard_card(card)
-      test_case = deck[0]
-      deck.gather_cards
-      deck.discard.size.should == 0
-      deck.size.should == 52
-      deck[0].should_not == test_case
+      old_deck = @deck.cards.clone
+      card = @deck.deal_card
+      @deck.discard_card(card)
+      
+      @deck.gather_cards
+      @deck.discard.size.should == 0
+      @deck.size.should == 52
+      
+      @deck.cards.should_not == old_deck
     end
   end
   

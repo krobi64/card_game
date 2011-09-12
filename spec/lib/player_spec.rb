@@ -30,6 +30,30 @@ describe Player do
         @player.hand.size.should == 1
       end
     end
+    
+    describe "#play_card" do
+      before(:each) do
+        @deck = mock CardDeck::Base
+        @deck.stub(:hand_played)
+        @real_card = mock Card
+        @cheat_card = mock Card
+        @player = Player.new
+        @player.hand << @real_card
+      end
+      
+      it "raises an error if the card 'played' is not in the players hand" do
+        lambda{@player.play_card(@cheat_card, @deck)}.should raise_error(Card::InvalidCardError)
+      end
+      
+      it "returns the card being played" do
+        @player.play_card(@real_card, @deck).should == @real_card
+      end
+      
+      it "removes the card from the player's hand" do
+        @player.play_card @real_card, @deck
+        @player.hand.should_not include @real_card
+      end
+    end
 
     describe "#clear_hand" do
       it "invokes CardDeck#discard_card" do

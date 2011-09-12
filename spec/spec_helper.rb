@@ -1,8 +1,8 @@
 dir = File.dirname(__FILE__) + "/.."
 require File.join(dir, 'card_game')
 
-class CardDeck
+class CardDeck::Base
   def [](i)
-     self.deck[i]
+     self.cards[i]
    end
 end

@@ -7,6 +7,16 @@ class Player
     @hand = []
   end
   
+  def play_card(card, deck)
+    if self.hand.include? card
+      i = self.hand.index card
+      deck.hand_played self, card
+      return self.hand.delete_at i
+    else
+      raise Card::InvalidCardError.new "Card not found in players hand"
+    end
+  end
+  
   def clear_hand(card_deck)
     self.hand = [] if hand.nil?
     if hand.size > 0
