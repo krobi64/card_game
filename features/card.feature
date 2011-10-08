@@ -140,6 +140,21 @@ Feature: Card
     Given the suit "blizzards" and the ordinal "5"
     When I create a card
     Then I should receive an error
+
+  Scenario: Comparing cards
+    Given any of the created cards:
+      | ordinal | suit      |
+      | 14      | clubs     |
+      | 2       | clubs     |
+      | 14      | spades    |
+    
+    When I compare the cards
+    Then "2" of "clubs" should be less than "14" of "clubs"
+	  And "2" of "clubs" should be less than "14" of "spades"
+	  And "14" of "clubs" should be less than "14" of "spades"
+  
+  
+  
   
   
   

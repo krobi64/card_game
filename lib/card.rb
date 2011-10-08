@@ -22,7 +22,7 @@ class Card
   def <=>(card)
     result = if self.ordinal < card.ordinal
       -1
-    elsif self.suit.to_s < card.suit.to_s && self.suit == card.suit
+    elsif self.suit.to_s < card.suit.to_s && self.ordinal == card.ordinal
       -1
     elsif self.ordinal == card.ordinal && self.suit == card.suit
       0

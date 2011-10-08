@@ -34,6 +34,10 @@ class Base
       (@valid_ordinals || Base::DEFAULT_ORDINALS).include? ordinal
     end
     
+    def total_decks
+      @number_of_decks
+    end
+    
     def get_deck
       deck = []
       (1..(@number_of_decks || Base::DEFAULT_QTY_DECKS)).each do  
@@ -85,7 +89,7 @@ class Base
   end
   
   def discard_card(card)
-    if !@cards.include?(card) && !self.discard.include?(card)
+    if @cards.count(card) + self.discard.count(card) + 1 <= self.class.total_decks
       @discard << card
     else
       raise "Invalid Discard - Duplicate Card"

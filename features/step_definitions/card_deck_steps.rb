@@ -102,13 +102,10 @@ Then /^I should have "([^"]*)" of each card$/ do |number_of_cards|
   end
 end
 
-Then /^the players should be ranked in the following order "([^"]*)"$/ do |expected_rankings|
-  expected_rankings = expected_rankings.split ", "
-  player_rankings = @deck.rank_hand
-  player_rankings.should == expected_rankings
+Then /^player "([^"]*)" should win the hand$/ do |player|
+  winning_player = @deck.rank_hand
+  winning_player.should == @players[player.to_i]
 end
-
-
 
 
 

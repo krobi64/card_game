@@ -2,4 +2,4 @@
 ##YAML Template
 ---
   
-  default: --format profile features
+  default: --no-source --format pretty features

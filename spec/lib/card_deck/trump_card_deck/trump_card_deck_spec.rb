@@ -50,12 +50,13 @@ describe CardDeck::TrumpCardDeck::Base do
   describe "ranking hands" do
     before(:each) do
       suits = [:diamonds, :spades, :clubs, :hearts]
+      ordinals = [8, 12, 14, 8]
       @players = []
       @cards = []
       (0..3).each do |i|
         card = mock Card
         card.stub(:suit).and_return(suits[i])
-        card.stub(:ordinal)
+        card.stub(:ordinal).and_return(ordinals[i])
         @cards << card
         player = mock Player
         player.stub(:play_card).and_return(card)
@@ -81,13 +82,13 @@ describe CardDeck::TrumpCardDeck::Base do
     end
     
     describe "#rank_hand" do
-      describe "when there is no trump and only one leading suit" do
+      context "when there is no trump and only one leading suit" do
         it "returns the first player" do
           @deck.rank_hand.should == @players[0]
         end
       end
       
-      describe "when there is no trump and more than one play the leading suit" do
+      context "when there is no trump and more than one play the leading suit" do
         before(:each) do
           @deck.new_hand
         end

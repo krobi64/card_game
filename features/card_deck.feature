@@ -39,26 +39,7 @@ Scenario: Dealing a euchre hand
   When I deal "5" cards
   Then each player should have "5" cards
     And the deck should have "4" cards remaining
-    
-Scenario: Ranking play on a trump hand
-  Given "4" players
-    And I create a trump deck
-    And "spades" are trump
-    And the players receive the following cards:
-     | player | card_rank | card_suit  |
-     | 0      | 14        |  clubs     |
-     | 1      | 10        |  clubs     |
-     | 2      | 14        |  diamonds  |
-     | 3      | 2         |  spades    |
-  When each player plays their card
-  Then the players should be ranked in the following order "3,0,1,2"
-
-
-
-
-
-
-
+   
 
 
 

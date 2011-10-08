@@ -37,17 +37,17 @@ describe Card do
     end
     
     it "matches cards of same rank and suit" do
-      @ace_spades.should == @ace_up_sleeve
+      (@ace_spades == @ace_up_sleeve).should be_true
     end
     
     it "defaults to Ace high" do
-      @ace_diamonds.should > @three_diamonds
-      @ace_diamonds.should > @three_spades
-      @ace_spades.should > @three_diamonds
+      (@ace_diamonds > @three_diamonds).should be_true
+      (@ace_diamonds > @three_spades).should be_true
+      (@ace_spades > @three_diamonds).should be_true
     end
     
     it "sorts same rank by suit" do
-      @ace_spades > @ace_diamonds
+      (@ace_spades > @ace_diamonds).should be_true
     end
     
   end
